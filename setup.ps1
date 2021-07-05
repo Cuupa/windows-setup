@@ -1,5 +1,5 @@
 $entertainmentSoftware = "vlc", "spotify"
-$developmentSoftware = "jetbrainstoolbox", "camunda-modeler", "unity", "git", "maven", "openjdk", "python3", "blender", "docker-cli", "docker-desktop"
+$developmentSoftware = "jetbrainstoolbox", "camunda-modeler", "unity", "git", "maven", "openjdk", "python3", "blender", "docker-cli", "docker-desktop", "dotnet-5.0-sdk", "dotnet-5.0-runtime"
 $communicationsSoftware = "discord", "teamspeak"
 $gamingSoftware = "steam-client", "epicgameslauncher", "origin"
 $tools = "atom", "1password", "nvidia-display-driver", "7zip", "teamviewer", "cloudstation", "openvpn", "etcher", "obs-studio", "handbrake", "virtualbox", "icue", "choco-update-notifier"
