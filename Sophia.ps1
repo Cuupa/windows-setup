@@ -1,3 +1,63 @@
+<#
+	.SYNOPSIS
+	Default preset file for "Windows 10 Sophia Script"
+
+	Version: v5.10.8
+	Date: 20.06.2021
+
+	Copyright (c) 2014–2021 farag
+	Copyright (c) 2019–2021 farag & Inestic
+
+	Thanks to all https://forum.ru-board.com members involved
+
+	.DESCRIPTION
+	Place the "#" char before function if you don't want to run it
+	Remove the "#" char before function if you want to run it
+	Every tweak in the preset file has its' corresponding function to restore the default settings
+
+	.EXAMPLE Run the whole script
+	.\Sophia.ps1
+
+	.EXAMPLE Run the script by specifying the module functions as an argument
+	.\Sophia.ps1 -Functions "DiagTrackService -Disable", "DiagnosticDataLevel -Minimal", UninstallUWPApps
+
+	.NOTES
+	Supported Windows 10 versions
+	Versions: 2004/20H2/21H1
+	Builds: 19041/19042/19043
+	Editions: Home/Pro/Enterprise
+	Architecture: x64
+
+	.NOTES
+	Set execution policy to be able to run scripts only in the current PowerShell session:
+		Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+
+	.NOTES
+	Running the script is best done on a fresh install because running it on wrong tweaked system may result in errors occurring
+
+	.NOTES
+	To use the TAB completion for functions and their arguments dot source the Function.ps1 script first:
+		. .\Function.ps1 (with a dot at the beginning)
+	Read more in the Functions.ps1 file
+
+	.LINK GitHub link
+	https://github.com/farag2/Windows-10-Sophia-Script
+
+	.LINK Telegram channel & group
+	https://t.me/sophianews
+	https://t.me/sophia_chat
+
+	.NOTES
+	https://forum.ru-board.com/topic.cgi?forum=62&topic=30617#15
+	https://habr.com/post/521202/
+	https://forums.mydigitallife.net/threads/powershell-windows-10-sophia-script.81675/
+	https://www.reddit.com/r/PowerShell/comments/go2n5v/powershell_script_setup_windows_10/
+
+	.LINK Authors
+	https://github.com/farag2
+	https://github.com/Inestic
+#>
+
 #Requires -RunAsAdministrator
 #Requires -Version 5.1
 
@@ -10,8 +70,6 @@ param
 )
 
 Clear-Host
-
-$Host.UI.RawUI.WindowTitle = "Windows 10 Sophia Script v5.10.8 | Made with $([char]::ConvertFromUtf32(0x1F497)) of Windows 10 | $([char]0x00A9) farag & Inestic, 2014–2021"
 
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
@@ -193,10 +251,10 @@ CortanaButton -Hide
 # CortanaButton -Show
 
 # Do not show sync provider notification within File Explorer
-OneDriveFileExplorerAd -Hide
+# OneDriveFileExplorerAd -Hide
 
 # Show sync provider notification within File Explorer (default value)
-# OneDriveFileExplorerAd -Show
+OneDriveFileExplorerAd -Show
 
 # When I snap a window, do not show what I can snap next to it
 #SnapAssist -Disable
@@ -304,17 +362,16 @@ ControlPanelView -LargeIcons
 # ControlPanelView -Category
 
 # Set the Windows mode color scheme to the dark
-# WindowsColorScheme -Dark
+WindowsColorScheme -Dark
 
 # Set the Windows mode color scheme to the light
-# Установить режим цвета для Windows на светлый
-WindowsColorScheme -Light
+# WindowsColorScheme -Light
 
 # Set the app mode color scheme to the dark
-AppMode -Dark
+# AppMode -Dark
 
 # Set the app mode color scheme to the light
-# AppMode -Light
+AppMode -Light
 
 # Do not show the "New App Installed" indicator
 # NewAppInstalledNotification -Hide
