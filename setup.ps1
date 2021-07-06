@@ -14,8 +14,8 @@ $WallpaperURL = "https://github.com/Cuupa/windows-setup/raw/main/wanderer_bonus_
 
 function Start-Setup() {
   Clear-Host
-  [Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12
   Set-ExecutionPolicy RemoteSigned
+  New-Item -ItemType "directory" -Path $InstallPath -Force
   Install-Updates
   Install-Sophia
   Customize-Sophia
