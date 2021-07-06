@@ -14,8 +14,8 @@ $WallpaperURL = "https://github.com/Cuupa/windows-setup/raw/main/wanderer_bonus_
 
 function Start-Setup() {
   Clear-Host
-  Set-ExecutionPolicy RemoteSigned
   [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]'Tls11,Tls12'
+  Set-ExecutionPolicy RemoteSigned
   New-Item -ItemType "directory" -Path $InstallPath -Force
   Install-Updates
   Install-Sophia
@@ -71,6 +71,10 @@ function Install-Updates() {
   Install-Module -Name PSWindowsUpdate -confirm:$false
   Log-Step("Installed PSWindowsUpdate")
   Import-Module PSWindowsUpdate
+  Stop-Service wuauserv
+  Remove-Item "C:\Windows\SoftwareDistribution" -Recurse -Force
+  Start-Service wuauserv
+  Log-Step("Cleared Update Cache")
   Log-Step("Installing Windows Updates")
   Get-WindowsUpdate -Install -AcceptAll
 }
@@ -93,7 +97,7 @@ function Install-Sophia() {
     Log-Error("Filehash not matching")
   }
 
-  Expand-Archive $PathToDownload -DestinationPath $InstallPath
+  Expand-Archive $PathToDownload -DestinationPath $InstallPath -Force
   Log-Step("Successfully installed Sophia")
 }
 
