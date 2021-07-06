@@ -69,8 +69,6 @@ param
 	$Functions
 )
 
-Clear-Host
-
 Remove-Module -Name Sophia -Force -ErrorAction Ignore
 Import-Module -Name $PSScriptRoot\Manifest\Sophia.psd1 -PassThru -Force
 
