@@ -14,3 +14,8 @@ You should definatly check him out, he has several other aweseome Wallpapers, Th
 [Project](https://github.com/farag2/Windows-10-Sophia-Script)
 
 This file was editied to fulfill MY personal needs
+
+# Disclaimer
+This is for my personal use, there is no guarantee that it will run on your machine. 
+
+This Scripts are tested against Windows 10 x64 "1607" and "21H1". While there where minor hickups at "1607" (aaaaand a bluescreen) it works smoothly on "21H1"
