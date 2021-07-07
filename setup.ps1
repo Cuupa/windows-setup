@@ -151,7 +151,7 @@ function Set-Default-Browser() {
   Expand-Archive $PathToDownload -DestinationPath $InstallPath -Force
   Remove-Item $PathToDownload
 
-  $cmd =  "& '" + $InstallPath + "\SetDefaultBrowser\SetDefaultBrowser.exe chrome"
+  $cmd =  "& '" + $InstallPath + "\SetDefaultBrowser\SetDefaultBrowser.exe' chrome"
   Invoke-Expression -Command $cmd
   Log-Step("Set default Browser to " + $DefaultBrowser)
 }
