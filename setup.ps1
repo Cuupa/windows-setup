@@ -118,7 +118,8 @@ function Customize-Sophia() {
 }
 
 function Call-Sophia() {
-  Invoke-Expression -Command "& '" + $InstallPath + "\Sophia Script v5.10.8\Sophia.ps1'"
+  $cmd =  "& '" + $InstallPath + "\Sophia Script v5.10.8\Sophia.ps1'"
+  Invoke-Expression -Command
 }
 
 function Install-Chocolatey() {
@@ -150,7 +151,8 @@ function Set-Default-Browser() {
   Expand-Archive $PathToDownload -DestinationPath $InstallPath -Force
   Remove-Item $PathToDownload
 
-  Invoke-Expression -Command "& '" + $InstallPath + "\SetDefaultBrowser\SetDefaultBrowser.exe chrome"
+  $cmd =  "& '" + $InstallPath + "\SetDefaultBrowser\SetDefaultBrowser.exe chrome"
+  Invoke-Expression -Command $cmd
   Log-Step("Set default Browser to " + $DefaultBrowser)
 }
 
@@ -160,11 +162,11 @@ function Install-Third-Party-Software() {
   $WebClient = New-Object System.Net.WebClient
   $WebClient.DownloadFile($URL, $PathToDownload)
 
-  $PathToDownload = $InstallPath "\GHL-Control-Center-V1.1.3.3.zip"
+  $PathToDownload = $InstallPath + "\GHL-Control-Center-V1.1.3.3.zip"
   $URL = "https://www.aquariumcomputer.com/de/download/get/file/GHL-Control-Center-V1.1.3.3.zip"
   $WebClient.DownloadFile($URL, $PathToDownload)
 
-  $PathToDownload = $InstallPath "\Synology_Drive_Client-3.0.1-12664.exe"
+  $PathToDownload = $InstallPath + "\Synology_Drive_Client-3.0.1-12664.exe"
   $URL = "https://global.download.synology.com/download/Utility/SynologyDriveClient/3.0.1-12664/Windows/Installer/Synology%20Drive%20Client-3.0.1-12664.exe"
   $WebClient.DownloadFile($URL, $PathToDownload)
 }
