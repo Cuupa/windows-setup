@@ -2,7 +2,7 @@ $entertainmentSoftware = "vlc", "spotify"
 $developmentSoftware = "jetbrainstoolbox", "camunda-modeler", "unity", "git", "maven", "openjdk", "python3", "blender", "docker-cli", "docker-desktop"
 $communicationsSoftware = "discord", "teamspeak"
 $gamingSoftware = "steam-client", "epicgameslauncher", "origin"
-$tools = "atom", "1password", "nvidia-display-driver", "7zip", "teamviewer", "openvpn", "etcher", "obs-studio", "handbrake", "virtualbox", "filezilla"
+$tools = "atom", "1password", "nvidia-display-driver", "7zip", "teamviewer", "openvpn", "etcher", "obs-studio", "handbrake", "virtualbox", "filezilla", "microsoft-windows-terminal", "makemkv", "hot-chocolatey"
 $browser = "googlechrome"
 
 $SophiaUrl = "https://github.com/farag2/Windows-10-Sophia-Script/releases/download/5.10.8/Sophia.Script.v5.10.8.zip"
@@ -24,6 +24,7 @@ function Start-Setup() {
   Set-Wallpaper
   Install-Chocolatey
   Install-Choco-Packages
+  Install-Third-Party-Software
   End-Install
 }
 
@@ -98,6 +99,7 @@ function Install-Sophia() {
   }
 
   Expand-Archive $PathToDownload -DestinationPath $InstallPath -Force
+  Remove-Item $PathToDownload
   Log-Step("Successfully installed Sophia")
 }
 
@@ -124,6 +126,21 @@ function Install-Choco-Packages() {
   choco install $gamingSoftware -y
   choco install $tools -y
   choco install $browser -y
+}
+
+function Install-Third-Party-Software() {
+  $PathToDownload = $InstallPath + "\lghub_installer.exe"
+  $URL = "https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.exe"
+  $WebClient = New-Object System.Net.WebClient
+  $WebClient.DownloadFile($URL, $PathToDownload)
+
+  $PathToDownload = $InstallPath "\GHL-Control-Center-V1.1.3.3.zip"
+  $URL = "https://www.aquariumcomputer.com/de/download/get/file/GHL-Control-Center-V1.1.3.3.zip"
+  $WebClient.DownloadFile($URL, $PathToDownload)
+
+  $PathToDownload = $InstallPath "\Synology_Drive_Client-3.0.1-12664.exe"
+  $URL = "https://global.download.synology.com/download/Utility/SynologyDriveClient/3.0.1-12664/Windows/Installer/Synology%20Drive%20Client-3.0.1-12664.exe"
+  $WebClient.DownloadFile($URL, $PathToDownload)
 }
 
 Start-Setup
