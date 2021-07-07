@@ -1,9 +1,11 @@
-$entertainmentSoftware = "vlc", "spotify"
-$developmentSoftware = "jetbrainstoolbox", "camunda-modeler", "unity", "git", "maven", "openjdk", "python3", "blender", "docker-cli", "docker-desktop"
-$communicationsSoftware = "discord", "teamspeak"
-$gamingSoftware = "steam-client", "epicgameslauncher", "origin"
-$tools = "atom", "1password", "nvidia-display-driver", "7zip", "teamviewer", "openvpn", "etcher", "obs-studio", "handbrake", "virtualbox", "filezilla", "microsoft-windows-terminal", "makemkv", "hot-chocolatey"
-$browser = "googlechrome"
+$EntertainmentSoftware = "vlc", "spotify"
+$DevelopmentSoftware = "jetbrainstoolbox", "camunda-modeler", "unity", "git", "maven", "openjdk", "python3", "blender", "docker-cli", "docker-desktop"
+$CommunicationsSoftware = "discord", "teamspeak"
+$GamingSoftware = "steam-client", "epicgameslauncher", "origin"
+$Tools = "atom", "1password", "nvidia-display-driver", "7zip", "teamviewer", "openvpn", "etcher", "obs-studio", "handbrake", "virtualbox", "filezilla", "microsoft-windows-terminal", "makemkv", "hot-chocolatey", "powertoys"
+$Browser = "googlechrome"
+
+$DefaultBrowser = "chrome"
 
 $SophiaUrl = "https://github.com/farag2/Windows-10-Sophia-Script/releases/download/5.10.8/Sophia.Script.v5.10.8.zip"
 $SophiaHash = '6716E08E06B509AC3AD3F07FB6A3368318D6F6922F1BC817F41CEA6A8AB259A1'
@@ -11,6 +13,9 @@ $InstallPath = "C:\temp"
 $SophiaUrlCustomized = "https://raw.githubusercontent.com/Cuupa/windows-setup/main/Sophia.ps1"
 
 $WallpaperURL = "https://github.com/Cuupa/windows-setup/raw/main/wanderer_bonus_5120x2880.png"
+
+$SetDefaultBrowserURL = "https://kolbi.cz/SetDefaultBrowser.zip"
+$SetDefaultBrowserHash = '6A4EE8731BBE780D547163E8FE17003F66CEADA8B528278E7E74274E71CAA1D8'
 
 function Start-Setup() {
   Clear-Host
@@ -24,6 +29,7 @@ function Start-Setup() {
   Set-Wallpaper
   Install-Chocolatey
   Install-Choco-Packages
+  Set-Default-Browser
   Install-Third-Party-Software
   End-Install
 }
@@ -89,6 +95,7 @@ function End-Install() {
 function Install-Sophia() {
   New-Item -Path $InstallPath -ItemType "directory" -Force
   $PathToDownload = $InstallPath + "\sophia.zip"
+
   $WebClient = New-Object System.Net.WebClient
   $WebClient.DownloadFile($SophiaUrl, $PathToDownload)
   $FileHash = Get-FileHash $PathToDownload
@@ -111,7 +118,7 @@ function Customize-Sophia() {
 }
 
 function Call-Sophia() {
-  Invoke-Expression -Command "& 'C:\temp\Sophia Script v5.10.8\Sophia.ps1'"
+  Invoke-Expression -Command "& '" + $InstallPath + "\Sophia Script v5.10.8\Sophia.ps1'"
 }
 
 function Install-Chocolatey() {
@@ -120,12 +127,31 @@ function Install-Chocolatey() {
 }
 
 function Install-Choco-Packages() {
-  choco install $entertainmentSoftware -y
-  choco install $developmentSoftware -y
-  choco install $communicationsSoftware -y
-  choco install $gamingSoftware -y
-  choco install $tools -y
-  choco install $browser -y
+  choco install $EntertainmentSoftware -y
+  choco install $DevelopmentSoftware -y
+  choco install $CommunicationsSoftware -y
+  choco install $GamingSoftware -y
+  choco install $Tools -y
+  choco install $Browser -y
+}
+
+function Set-Default-Browser() {
+  $SetDefaultBrowserURL = "https://kolbi.cz/SetDefaultBrowser.zip"
+  $PathToDownload = $InstallPath + "\SetDefaultBrowser.zip"
+  $WebClient = New-Object System.Net.WebClient
+  $WebClient.DownloadFile($SetDefaultBrowserURL, $PathToDownload)
+  $FileHash = Get-FileHash $PathToDownload
+
+  if($FileHash.Hash -ne $SetDefaultBrowserHash) {
+    Remove-Item $PathToDownload
+    Log-Error("Filehash not matching")
+  }
+
+  Expand-Archive $PathToDownload -DestinationPath $InstallPath -Force
+  Remove-Item $PathToDownload
+
+  Invoke-Expression -Command "& '" + $InstallPath + "\SetDefaultBrowser\SetDefaultBrowser.exe chrome"
+  Log-Step("Set default Browser to " + $DefaultBrowser)
 }
 
 function Install-Third-Party-Software() {
