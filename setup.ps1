@@ -2,7 +2,7 @@ $entertainmentSoftware = "vlc", "spotify"
 $developmentSoftware = "jetbrainstoolbox", "camunda-modeler", "unity", "git", "maven", "openjdk", "python3", "blender", "docker-cli", "docker-desktop"
 $communicationsSoftware = "discord", "teamspeak"
 $gamingSoftware = "steam-client", "epicgameslauncher", "origin"
-$tools = "atom", "1password", "nvidia-display-driver", "7zip", "teamviewer", "cloudstation", "openvpn", "etcher", "obs-studio", "handbrake", "virtualbox", "filezilla"
+$tools = "atom", "1password", "nvidia-display-driver", "7zip", "teamviewer", "openvpn", "etcher", "obs-studio", "handbrake", "virtualbox", "filezilla"
 $browser = "googlechrome"
 
 $SophiaUrl = "https://github.com/farag2/Windows-10-Sophia-Script/releases/download/5.10.8/Sophia.Script.v5.10.8.zip"
